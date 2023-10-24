@@ -38,6 +38,7 @@ kube-prometheus-stack:
   grafana:
     service:
       type: LoadBalancer
+      port: 5566
     # Anonymous login without credentials -- ONLY NON PRODUCTION ENVIRONMENTS!
     grafana.ini:
       auth:
