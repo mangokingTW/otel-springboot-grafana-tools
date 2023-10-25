@@ -79,7 +79,7 @@ kube-prometheus-stack:
         type: tempo
         uid: tempo
         access: proxy
-        url: http://tempo-tempo-distributed-query-frontend:3100
+        url: http://tempo-query-frontend:3100
         jsonData:
           httpMethod: GET
           # Tempo redirects to Loki logs by specific trace_id

@@ -18,7 +18,6 @@ config: |
     search:
       max_duration: 0
   multitenancy_enabled: false
-  search_enabled: true
   compactor:
     compaction:
       block_retention: 1440h
@@ -42,7 +41,7 @@ config: |
             endpoint: 0.0.0.0:4317
   querier:
     frontend_worker:
-      frontend_address: tempo-tempo-distributed-query-frontend-discovery:9095
+      frontend_address: tempo-query-frontend-discovery:9095
   ingester:
     lifecycler:
       ring:
@@ -53,10 +52,7 @@ config: |
   memberlist:
     abort_if_cluster_join_fails: false
     join_members:
-      - tempo-tempo-distributed-gossip-ring
-  overrides:
-    max_search_bytes_per_trace: 0
-    per_tenant_override_config: /conf/overrides.yaml
+      - tempo-gossip-ring
   server:
     http_listen_port: 3100
     log_level: info

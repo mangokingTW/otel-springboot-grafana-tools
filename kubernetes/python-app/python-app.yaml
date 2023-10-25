@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+  labels:
+    app: python-app
+spec:
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+        - name: python-app
+          image: "yench/otel-demo-python:0.0.1"
+          imagePullPolicy: Always
+          env:
+            - name: SERVER_PORT
+              value: '8080'
+            - name: MANAGEMENT_SERVER_PORT
+              value: '8081'
+            # Setting OTEL_EXPORTER_METRICS: none - Default: OTLP
+            - name: OTEL_METRICS_EXPORTER
+              value: none
+            - name: OTEL_TRACES_EXPORTER
+              value: otlp,logging
+            # Setting Tempo Distributor Service using GRPC Port -> 4317
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://tempo-distributor.observability.svc.cluster.local:4317
+            - name: OTEL_SERVICE_NAME
+              value: python-app
+            - name: KUBE_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: app=python-app
+                # ---
+                # apiVersion: v1
+                # kind: Service
+                # metadata:
+                #   name: python-app
+                #   labels:
+                #     app: python-app
+                #   annotations:
+                #     # Annotations for Prometheus - scrape config 
+                #     prometheus.io/path: '/actuator/prometheus'
+                #     prometheus.io/port: 'actuator'
+                #     prometheus.io/scrape: 'true'
+                # spec:
+                #   type: LoadBalancer
+                #   ports:
+                #     - name: http
+                #       port: 8080
+                #       targetPort: http
+                #       protocol: TCP
+                #     - name: actuator
+                #       port: 8081
+                #       targetPort: actuator
+                #       protocol: TCP
+                #   selector:
+                #     app: python-app

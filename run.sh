@@ -18,7 +18,7 @@ helm upgrade --install loki grafana/loki-distributed --version 0.76.0 -n observa
 
 cd ../tempo
 kubectl apply -f minio.yaml
-helm upgrade --install tempo grafana/tempo-distributed --version 0.21.2 -n observability -f tempo.yaml
+helm upgrade --install tempo grafana/tempo-distributed --version 1.6.13 -n observability -f tempo.yaml
 
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -29,6 +29,9 @@ helm upgrade --install kube-prometheus-stack --version 1.0.0-SNAPSHOT -n observa
 
 cd ../springboot-app
 kubectl apply -f springboot-app.yaml
+
+cd ../python-app
+kubectl apply -f python-app.yaml
 
 kubectl get svc -l app=springboot-app
 kubectl get svc -n observability kube-prometheus-stack-grafana
