@@ -36,6 +36,8 @@ kube-prometheus-stack:
               action: replace
               target_label: kubernetes_name
   grafana:
+    image:
+      tag: 10.2.0
     service:
       type: LoadBalancer
       port: 5566
