@@ -9,7 +9,7 @@ Download Multipass [here](https://multipass.run/)
 
 Create Ubuntu instance on local environment:
 
-`$ multipass launch --name demo --mem 4G --disk 10G`
+`$ multipass launch --name demo --mem 4G --disk 30G`
 
 Log in into the server:
 
@@ -21,7 +21,7 @@ $ sudo su
 Clone the repo: 
 
 ```
-$ git clone https://github.com/stazdx/otel-springboot-grafana-tools.git
+$ git clone https://github.com/mangokingTW/otel-springboot-grafana-tools.git
 $ cd otel-springboot-grafana-tools
 ```
 
@@ -37,8 +37,8 @@ Get IP and ports for `Spring Boot App` and `Grafana`
 
 | Service | URL |
 |------|------|
-| Spring Boot | 192.168.64.5:8080 |
-| Grafana | 192.168.64.5:32656 |
+| Spring Boot | 192.168.64.2:8080 |
+| Grafana | 192.168.64.2:5566 |
 
 ![Kubernetes Services](img/svc.png)
 
