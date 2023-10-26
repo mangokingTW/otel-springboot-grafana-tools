@@ -1,6 +1,6 @@
 #bin/bash
 
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.24.16+k3s1" sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.28.2+k3s1" sh -
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 snap install helm --classic
 mkdir -p ~/.kube
