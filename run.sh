@@ -25,7 +25,7 @@ helm repo update
 
 cd ../prometheus-grafana
 helm dependency update
-helm upgrade --install kube-prometheus-stack --version 1.0.0-SNAPSHOT -n observability .
+helm upgrade --install kube-prometheus-stack -n observability .
 
 cd ../springboot-app
 kubectl apply -f springboot-app.yaml

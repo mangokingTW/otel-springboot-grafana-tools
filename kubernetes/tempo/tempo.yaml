@@ -13,6 +13,10 @@ queryFrontend:
       # service.beta.kubernetes.io/aws-load-balancer-internal: "true"
       # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
       # service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
+
+metricsGenerator:
+  enabled: true
+
 config: |
   query_frontend:
     search:
@@ -70,3 +74,12 @@ config: |
       blocklist_poll: 5m
       wal:
         path: /var/tempo/wal
+  overrides:
+    metrics_generator_processors:
+      - service-graphs
+      - span-metrics
+  metrics_generator:
+    storage:
+      path: /var/tempo/generator_wal
+      remote_write:
+        - url: http://kube-prometheus-stack-prometheus:9090/api/v1/write
