@@ -24,8 +24,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 
 cd ../prometheus-grafana
-helm dependency update
-helm upgrade --install kube-prometheus-stack -n observability .
+helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack --version 52.0.1 -n observability -f values.yaml
 
 cd ../springboot-app
 kubectl apply -f springboot-app.yaml
